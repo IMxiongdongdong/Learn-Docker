@@ -8,6 +8,8 @@
 
 `dockerfile`一般分为四个部分：基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令。一开始必须指明所基于的镜像名称，接下来说明维护者信息。后面是镜像操作命令。如`RUN`指令，`RUN`指令将对镜像执行跟随的命令，每运行一条`RUN`指令，镜像添加新的一层，并提交。最后是`CMD`指令，来指定运行容器时的操作命令。
 
+### 3.1 指令
+
 指令的一般格式为`INSTRUCTION arguments`，指令包括`FROM,MAINTAINER,RUN`等。
 
 * `FROM`
@@ -72,4 +74,9 @@
 
 * `ONBUILD`
 
-  格式为`ONBUILD [INSTRUCTION]`。配置
+  格式为`ONBUILD [INSTRUCTION]`。配置当所创建的镜像作为其它新创建镜像的基础镜像时，所执行的操作命令。
+  
+### 3.2 创建
+
+  编写完成`Dockerfile`之后，可以通过`docker build`命令来创建镜像。基本格式为`docker build[选项]路径`，该命令将读取指定路径下（包括子目录）的`Dockerfile`，并将该路径下所有内容发送给`Docker`服务端，由服务端来创建镜像。因此一般建议放置`Dockerfile`的目录为空目录。也可以通过`.dockerignore`文件（每一行添加一条匹配模式）来让`Docker`忽略路径下的目录和文件。
+
